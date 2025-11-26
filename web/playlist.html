@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>我的歌单 - xyloph0nex17</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+  <style>
+    body { margin: 0; padding: 0; font-family: sans-serif; }
+    .card { box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    .back-btn { transition: all 0.3s ease; }
+    /* 唱片样式 */
+    .record-container {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      margin: 0 auto;
+      perspective: 1000px;
+    }
+    .record {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: linear-gradient(45deg, #333 25%, #111 25%, #111 50%, #333 50%, #333 75%, #111 75%, #111);
+      background-size: 40px 40px;
+      position: relative;
+      transition: transform 0.5s ease;
+      cursor: pointer;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    }
+    .record::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: #fff;
+      z-index: 2;
+    }
+    .record::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background: #333;
+      z-index: 3;
+    }
+    /* 播放时旋转 */
+    .record.playing {
+      animation: spin 8s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    /* 歌曲列表样式 */
+    .song-list {
+      margin-top: 20px;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+    .song-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 12px;
+      background: #f5f5f5;
+      border-radius: 6px;
+      margin-bottom: 8px;
+      transition: background 0.3s ease;
+    }
+    .song-item:hover {
+      background: #e9e9e9;
+    }
+    .song-info {
+      flex: 1;
+    }
+    .song-title {
+      font-weight: 500;
+      color: #333;
+    }
+    .song-singer {
+      font-size: 12px;
+      color: #666;
+    }
+    /* 网易云跳转链接样式 */
+    .netease-link {
+      text-align: center;
+      margin: 10px 0 16px;
+    }
+    .netease-btn {
+      display: inline-flex;
+      align-items: center;
+      color: #e60023; /* 网易云红色 */
+      font-size: 14px;
+      padding: 4px 12px;
+      border: 1px solid #e60023;
+      border-radius: 20px;
+      transition: all 0.3s ease;
+    }
+    .netease-btn:hover {
+      background: #e60023;
+      color: white;
+    }
+    /* 播放提示样式 */
+    .play-tip {
+      text-align: center;
+      color: #666;
+      font-size: 13px;
+      margin: 8px 0 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .play-tip i {
+      color: #999;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 min-h-screen p-4 md:p-8">
+  <div class="max-w-md mx-auto bg-white rounded-xl p-6 card">
+    <!-- 返回按钮 -->
+    <div class="flex justify-between items-center mb-8">
+      <h2 class="text-xl font-bold text-gray-800 flex items-center">
+        <i class="fa fa-music text-purple-500 mr-2"></i>我的歌单
+      </h2>
+      <a href="../index.html" class="back-btn bg-gray-100 text-gray-700 px-3 py-1 rounded-lg hover:bg-gray-200">
+        <i class="fa fa-arrow-left mr-1"></i>返回
+      </a>
+    </div>
+
+    <!-- 唱片展示区 + 播放提示 -->
+    <div class="record-container" id="record">
+      <div class="record" id="recordDisc"></div>
+      <!-- 音频标签 -->
+      <audio id="playlist-audio" preload="none">
+        您的浏览器不支持音频播放
+      </audio>
+    </div>
+    <!-- 新增：播放操作提示 -->
+    <div class="play-tip">
+      <i class="fa fa-info-circle"></i>
+      <span>点击唱片播放/暂停，点击歌曲切换曲目</span>
+    </div>
+
+    <!-- 歌单标题 + 网易云跳转链接 -->
+    <div class="netease-link">
+      <a href="https://music.163.com/playlist?id=你的歌单ID" target="_blank" class="netease-btn">
+        <i class="fa fa-external-link mr-1"></i>全部歌曲（网易云歌单）
+      </a>
+    </div>
+
+    <!-- 歌曲列表 -->
+    <div class="song-list" id="song-list">
+      <!-- 歌曲1：示例 -->
+      <div class="song-item" data-audio="告五人 - 给你一瓶魔法药水.flac">
+        <div class="song-info">
+          <div class="song-title">给你一瓶魔法药水</div>
+          <div class="song-singer">告五人</div>
+        </div>
+        <i class="fa fa-music text-purple-500"></i>
+      </div>
+      <!-- 歌曲2：示例 -->
+      <div class="song-item" data-audio="告五人 - 我想要占据你.mp3">
+        <div class="song-info">
+          <div class="song-title">我想要占据你</div>
+          <div class="song-singer">告五人</div>
+        </div>
+        <i class="fa fa-music text-purple-500"></i>
+      </div>
+    </div>
+  </div>
+
+  <footer class="text-center text-gray-500 text-sm mt-6">
+    © 2025 xyloph0nex17 | <a href="../index.html" class="text-blue-500 hover:underline">回到主页</a>
+  </footer>
+
+  <script>
+    // 唱片播放/暂停逻辑
+    const recordContainer = document.getElementById('record');
+    const recordDisc = document.getElementById('recordDisc');
+    const audio = document.getElementById('playlist-audio');
+    const songList = document.getElementById('song-list');
+    const songItems = songList.querySelectorAll('.song-item');
+    let isPlaying = false;
+
+    // 默认加载第一首歌
+    if (songItems.length > 0) {
+      audio.src = songItems[0].getAttribute('data-audio');
+    }
+
+    // 点击唱片切换播放/暂停
+    recordContainer.addEventListener('click', () => {
+      if (!audio.src) return;
+
+      if (isPlaying) {
+        audio.pause();
+        recordDisc.classList.remove('playing');
+      } else {
+        audio.play().catch(err => {
+          console.log('播放失败，请检查音频文件路径：', err);
+        });
+        recordDisc.classList.add('playing');
+      }
+      isPlaying = !isPlaying;
+    });
+
+    // 点击歌曲切换播放
+    songItems.forEach(item => {
+      item.addEventListener('click', () => {
+        const audioSrc = item.getAttribute('data-audio');
+        if (audioSrc !== audio.src) {
+          audio.src = audioSrc;
+          audio.play().catch(err => {
+            console.log('播放失败，请检查音频文件路径：', err);
+          });
+          recordDisc.classList.add('playing');
+          isPlaying = true;
+        } else {
+          if (isPlaying) {
+            audio.pause();
+            recordDisc.classList.remove('playing');
+          } else {
+            audio.play();
+            recordDisc.classList.add('playing');
+          }
+          isPlaying = !isPlaying;
+        }
+      });
+    });
+
+    // 音频播放结束处理
+    audio.addEventListener('ended', () => {
+      recordDisc.classList.remove('playing');
+      isPlaying = false;
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>近期项目 - xyloph0nex17</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+  <style>
+    body { margin: 0; padding: 0; font-family: sans-serif; }
+    .card { box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    .back-btn { transition: all 0.3s ease; }
+  </style>
+</head>
+<body class="bg-gray-50 min-h-screen p-4 md:p-8">
+  <div class="max-w-md mx-auto bg-white rounded-xl p-6 card">
+    <!-- 返回按钮：当前页跳转回主页 -->
+    <div class="flex justify-between items-center mb-6">
+      <h2 class="text-xl font-bold text-gray-800 flex items-center">
+        <i class="fa fa-briefcase text-green-500 mr-2"></i>近期学习/工作
+      </h2>
+      <a href="../index.html" class="back-btn bg-gray-100 text-gray-700 px-3 py-1 rounded-lg hover:bg-gray-200">
+        <i class="fa fa-arrow-left mr-1"></i>返回
+      </a>
+    </div>
+
+    <!-- 项目内容（可添加多个） -->
+    <div class="space-y-4">      
+      <!-- 项目1 -->
+      <div class="bg-gray-50 p-4 rounded-lg border-l-4 border-green-500">
+        <p class="font-medium text-gray-800">个人网站开发</p>
+        <p class="text-sm text-gray-500 mt-1">2024.11.21 - 2024.11.28</p>
+        <p class="text-sm text-gray-600 mt-2">项目描述：制作首个个人网页</p>
+        <a href="https://github.com/xyloph0nex17/data-visualization" target="_blank" class="inline-block text-blue-500 text-sm mt-2 hover:underline">
+          <i class="fa fa-github mr-1"></i>my web
+        </a>
+      </div>
+      <!-- 项目2 -->
+      <div class="bg-gray-50 p-4 rounded-lg border-l-4 border-green-500">
+        <p class="font-medium text-gray-800">CSAPP</p>
+        <p class="text-sm text-gray-500 mt-1">2024.10 - 至今</p>
+        <p class="text-sm text-gray-600 mt-2">学习进度：第五章-优化程序性能</p>
+        <!-- GitHub源码链接保留新窗口打开（如需当前页打开可删除target="_blank"） -->
+        <a href="https://github.com/xyloph0nex17/blog-project" target="_blank" class="inline-block text-blue-500 text-sm mt-2 hover:underline">
+          <i class="fa fa-github mr-1"></i>my csapp lab
+        </a>
+      </div>
+
+      <!-- 项目3 -->
+      <div class="bg-gray-50 p-4 rounded-lg border-l-4 border-green-500">
+        <p class="font-medium text-gray-800">微积分学</p>
+        <p class="text-sm text-gray-500 mt-1">2024.10 - 至今</p>
+        <p class="text-sm text-gray-600 mt-2">学习进度：不定积分</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 页脚回到主页：当前页跳转 -->
+  <footer class="text-center text-gray-500 text-sm mt-6">
+    © 2025 xyloph0nex17 | <a href="../index.html" class="text-blue-500 hover:underline">回到主页</a>
+  </footer>
+</body>
+</html>

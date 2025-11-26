@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>联系我 - xyloph0nex17</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+  <style>
+    body { margin: 0; padding: 0; font-family: sans-serif; }
+    .card { box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    .back-btn { transition: all 0.3s ease; }
+    /* 联系方式项样式 */
+    .contact-item {
+      display: flex;
+      align-items: center;
+      padding: 12px 16px;
+      background: #f9fafb;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    .contact-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 16px;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 min-h-screen p-4 md:p-8">
+  <div class="max-w-md mx-auto bg-white rounded-xl p-6 card">
+    <!-- 返回按钮 -->
+    <div class="flex justify-between items-center mb-6">
+      <h2 class="text-xl font-bold text-gray-800 flex items-center">
+        <i class="fa fa-phone-square text-orange-500 mr-2"></i>联系我
+      </h2>
+      <a href="../index.html" class="back-btn bg-gray-100 text-gray-700 px-3 py-1 rounded-lg hover:bg-gray-200">
+        <i class="fa fa-arrow-left mr-1"></i>返回
+      </a>
+    </div>
+
+    <!-- 联系方式列表 -->
+    <div class="space-y-4 mb-8">
+      <!-- QQ -->
+      <div class="contact-item">
+        <div class="contact-icon bg-sky-100 text-sky-500">
+          <i class="fa fa-qq text-xl"></i>
+        </div>
+        <div>
+          <p class="text-sm text-gray-500">QQ号</p>
+          <p class="text-lg font-medium text-gray-800">1782370400</p> <!-- 替换为你的QQ号 -->
+        </div>
+      </div>
+
+      <!-- 微信 -->
+      <div class="contact-item">
+        <div class="contact-icon bg-green-100 text-green-500">
+          <i class="fa fa-weixin text-xl"></i>
+        </div>
+        <div>
+          <p class="text-sm text-gray-500">微信号</p>
+          <p class="text-lg font-medium text-gray-800">xyloph0nex17</p> <!-- 替换为你的微信号 -->
+        </div>
+      </div>
+
+      <!-- 电话号码 -->
+      <div class="contact-item">
+        <div class="contact-icon bg-orange-100 text-orange-500">
+          <i class="fa fa-phone text-xl"></i>
+        </div>
+        <div>
+          <p class="text-sm text-gray-500">电话号码</p>
+          <p class="text-lg font-medium text-gray-800">18629043168</p> <!-- 替换为你的手机号 -->
+        </div>
+      </div>
+    </div>
+
+    <!-- 温馨提示（可选） -->
+  </div>
+
+  <footer class="text-center text-gray-500 text-sm mt-6">
+    © 2025 xyloph0nex17 | <a href="../index.html" class="text-blue-500 hover:underline">回到主页</a>
+  </footer>
+</body>
+</html>
