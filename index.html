@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>我的个人网站</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- 指定TailwindCSS稳定版本，避免加载异常 -->
+  <script src="https://cdn.tailwindcss.com/v3.4.1"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
   <style>
     body { margin: 0; padding: 0; font-family: sans-serif; }
@@ -14,18 +15,21 @@
 </head>
 <body class="bg-gray-50 min-h-screen p-4 md:p-8">
   <div class="max-w-md mx-auto bg-white rounded-xl p-6 card">
-    <!-- 头像 -->
+    <!-- 头像：若本地图片缺失，先替换为在线占位图测试 -->
     <div class="flex justify-center mb-4">
       <img src="image/xyx.jpg" alt="个人头像" class="w-32 h-32 rounded-full object-cover border-4 border-blue-500">
+      <!-- 备用：图片缺失时启用下面这行
+      <img src="https://via.placeholder.com/128" alt="个人头像" class="w-32 h-32 rounded-full object-cover border-4 border-blue-500">
+      -->
     </div>
 
     <!-- 个人信息 -->
     <h1 class="text-2xl font-bold text-center text-gray-800 mb-1">xyloph0nex17</h1>
     <p class="text-center text-gray-500 mb-8">Cser in Hust</p>
 
-    <!-- 教育经历 -->
+    <!-- 教育经历：添加target="_self"明确窗口行为 -->
     <div class="mb-6">
-      <a href="web/education.html" class="link-btn w-full flex justify-between items-center bg-gray-50 p-3 rounded-lg mb-2 hover:bg-gray-100 hover:shadow-md">
+      <a href="web/education.html" target="_self" class="link-btn w-full flex justify-between items-center bg-gray-50 p-3 rounded-lg mb-2 hover:bg-gray-100 hover:shadow-md">
         <h3 class="text-lg font-semibold text-gray-700 flex items-center">
           <i class="fa fa-graduation-cap text-blue-500 mr-2"></i>教育经历
         </h3>
@@ -35,7 +39,7 @@
 
     <!-- 近期工作 -->
     <div class="mb-6">
-      <a href="web/projects.html" class="link-btn w-full flex justify-between items-center bg-gray-50 p-3 rounded-lg mb-2 hover:bg-gray-100 hover:shadow-md">
+      <a href="web/projects.html" target="_self" class="link-btn w-full flex justify-between items-center bg-gray-50 p-3 rounded-lg mb-2 hover:bg-gray-100 hover:shadow-md">
         <h3 class="text-lg font-semibold text-gray-700 flex items-center">
           <i class="fa fa-briefcase text-green-500 mr-2"></i>近期工作/项目
         </h3>
@@ -45,7 +49,7 @@
 
     <!-- 歌单入口 -->
     <div class="mb-6">
-      <a href="web/playlist.html" class="link-btn w-full flex justify-between items-center bg-gray-50 p-3 rounded-lg mb-2 hover:bg-gray-100 hover:shadow-md">
+      <a href="web/playlist.html" target="_self" class="link-btn w-full flex justify-between items-center bg-gray-50 p-3 rounded-lg mb-2 hover:bg-gray-100 hover:shadow-md">
         <h3 class="text-lg font-semibold text-gray-700 flex items-center">
           <i class="fa fa-music text-purple-500 mr-2"></i>我的歌单
         </h3>
@@ -53,9 +57,9 @@
       </a>
     </div>
 
-    <!-- 新增：联系我入口 -->
+    <!-- 联系我入口 -->
     <div class="mb-8">
-      <a href="web/contact.html" class="link-btn w-full flex justify-between items-center bg-gray-50 p-3 rounded-lg mb-2 hover:bg-gray-100 hover:shadow-md">
+      <a href="web/contact.html" target="_self" class="link-btn w-full flex justify-between items-center bg-gray-50 p-3 rounded-lg mb-2 hover:bg-gray-100 hover:shadow-md">
         <h3 class="text-lg font-semibold text-gray-700 flex items-center">
           <i class="fa fa-phone-square text-orange-500 mr-2"></i>联系我
         </h3>
@@ -71,8 +75,9 @@
     </div>
   </div>
 
+  <!-- 补充回到主页链接，优化用户体验 -->
   <footer class="text-center text-gray-500 text-sm mt-6">
-    © 2025 xyloph0nex17
+    © 2025 xyloph0nex17 | <a href="./index.html" class="text-blue-500 hover:underline">回到主页</a>
   </footer>
 </body>
 </html>
