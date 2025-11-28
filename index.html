@@ -4,80 +4,243 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>我的个人网站</title>
-  <!-- 指定TailwindCSS稳定版本，避免加载异常 -->
-  <script src="https://cdn.tailwindcss.com/v3.4.1"></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+  <!-- 完全移除外部CDN，所有样式内置，避免加载失败 -->
   <style>
-    body { margin: 0; padding: 0; font-family: sans-serif; }
-    .card { box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-    .link-btn { transition: all 0.3s ease; }
+    /* 全局基础样式 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    body {
+      background-color: #f9fafb; /* 替代 bg-gray-50 */
+      min-height: 100vh;
+      padding: 1rem; /* 移动端基础间距 */
+      padding-top: 2rem;
+    }
+
+    /* 响应式间距：适配平板/桌面端 */
+    @media (min-width: 768px) {
+      body {
+        padding: 2rem 2rem 1rem;
+      }
+    }
+
+    /* 卡片容器：核心视觉样式 */
+    .card {
+      max-width: 28rem; /* 替代 max-w-md */
+      margin: 0 auto;
+      background-color: white;
+      border-radius: 1rem; /* 替代 rounded-xl */
+      padding: 1.5rem; /* 替代 p-6 */
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    /* 头像样式 */
+    .avatar-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1rem; /* 替代 mb-4 */
+    }
+
+    .avatar {
+      width: 8rem; /* 替代 w-32 */
+      height: 8rem; /* 替代 h-32 */
+      border-radius: 50%; /* 替代 rounded-full */
+      object-fit: cover;
+      border: 4px solid #3b82f6; /* 替代 border-blue-500 */
+    }
+
+    /* 个人信息样式 */
+    .name {
+      font-size: 1.5rem; /* 替代 text-2xl */
+      font-weight: 700; /* 替代 font-bold */
+      color: #1f2937; /* 替代 text-gray-800 */
+      text-align: center;
+      margin-bottom: 0.25rem; /* 替代 mb-1 */
+    }
+
+    .subtitle {
+      font-size: 1rem;
+      color: #6b7280; /* 替代 text-gray-500 */
+      text-align: center;
+      margin-bottom: 2rem; /* 替代 mb-8 */
+    }
+
+    /* 链接按钮通用样式 */
+    .link-btn {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      background-color: #f9fafb; /* 替代 bg-gray-50 */
+      padding: 0.75rem; /* 替代 p-3 */
+      border-radius: 0.5rem; /* 替代 rounded-lg */
+      margin-bottom: 0.5rem; /* 替代 mb-2 */
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .link-btn:hover {
+      background-color: #f3f4f6; /* 替代 hover:bg-gray-100 */
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); /* 替代 hover:shadow-md */
+    }
+
+    /* 按钮文字与图标样式 */
+    .btn-text {
+      font-size: 1.125rem; /* 替代 text-lg */
+      font-weight: 600; /* 替代 font-semibold */
+      color: #374151; /* 替代 text-gray-700 */
+      display: flex;
+      align-items: center;
+    }
+
+    /* 不同模块的图标颜色 */
+    .icon-edu { color: #3b82f6; } /* 蓝色：教育经历 */
+    .icon-project { color: #22c55e; } /* 绿色：项目 */
+    .icon-music { color: #a855f7; } /* 紫色：歌单 */
+    .icon-contact { color: #f97316; } /* 橙色：联系我 */
+
+    .btn-icon {
+      margin-right: 0.5rem; /* 替代 mr-2 */
+      font-size: 1.2rem;
+    }
+
+    .btn-arrow {
+      color: #6b7280; /* 替代 text-gray-500 */
+      font-size: 1.2rem;
+    }
+
+    /* 模块间距 */
+    .module {
+      margin-bottom: 1.5rem; /* 替代 mb-6 */
+    }
+
+    .module-contact {
+      margin-bottom: 2rem; /* 替代 mb-8 */
+    }
+
+    /* GitHub按钮样式 */
+    .github-btn {
+      display: inline-flex;
+      align-items: center;
+      background-color: #1f2937; /* 替代 bg-gray-800 */
+      color: white;
+      padding: 0.5rem 1rem; /* 替代 px-4 py-2 */
+      border-radius: 0.5rem; /* 替代 rounded-lg */
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .github-btn:hover {
+      background-color: #111827; /* 替代 hover:bg-gray-700 */
+    }
+
+    .github-icon {
+      margin-right: 0.5rem; /* 替代 mr-2 */
+    }
+
+    .github-container {
+      text-align: center;
+    }
+
+    /* 页脚样式 */
+    footer {
+      text-align: center;
+      color: #6b7280; /* 替代 text-gray-500 */
+      font-size: 0.875rem; /* 替代 text-sm */
+      margin-top: 1.5rem; /* 替代 mt-6 */
+    }
+
+    .footer-link {
+      color: #3b82f6; /* 替代 text-blue-500 */
+      text-decoration: none;
+    }
+
+    .footer-link:hover {
+      text-decoration: underline; /* 替代 hover:underline */
+    }
+
+    /* 自定义图标字体（替代Font Awesome，避免CDN依赖）
+       用纯文本符号模拟图标，兼容所有环境 */
+    .icon-graduation::before { content: "🎓"; }
+    .icon-briefcase::before { content: "💼"; }
+    .icon-music-note::before { content: "🎵"; }
+    .icon-phone::before { content: "📞"; }
+    .icon-github::before { content: "🐙"; }
+    .icon-angle-right::before { content: "→"; }
   </style>
 </head>
-<body class="bg-gray-50 min-h-screen p-4 md:p-8">
-  <div class="max-w-md mx-auto bg-white rounded-xl p-6 card">
-    <!-- 头像：若本地图片缺失，先替换为在线占位图测试 -->
-    <div class="flex justify-center mb-4">
-      <img src="image/xyx.jpg" alt="个人头像" class="w-32 h-32 rounded-full object-cover border-4 border-blue-500">
-      <!-- 备用：图片缺失时启用下面这行
-      <img src="https://via.placeholder.com/128" alt="个人头像" class="w-32 h-32 rounded-full object-cover border-4 border-blue-500">
-      -->
+<body>
+  <div class="card">
+    <!-- 头像 -->
+    <div class="avatar-container">
+      <!-- 优先使用本地图片，备用占位符（纯文本）避免裂图 -->
+      <img src="image/xyx.jpg" alt="个人头像" class="avatar" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;128&quot; height=&quot;128&quot; viewBox=&quot;0 0 128 128&quot; fill=&quot;%233b82f6&quot;><circle cx=&quot;64&quot; cy=&quot;64&quot; r=&quot;60&quot; stroke=&quot;%23f9fafb&quot; stroke-width=&quot;4&quot;/><text x=&quot;50%&quot; y=&quot;50%&quot; text-anchor=&quot;middle&quot; dominant-baseline=&quot;middle&quot; font-size=&quot;40&quot; fill=&quot;white&quot;>头像</text></svg>';">
     </div>
 
     <!-- 个人信息 -->
-    <h1 class="text-2xl font-bold text-center text-gray-800 mb-1">xyloph0nex17</h1>
-    <p class="text-center text-gray-500 mb-8">Cser in Hust</p>
+    <h1 class="name">xyloph0nex17</h1>
+    <p class="subtitle">Cser in Hust</p>
 
-    <!-- 教育经历：添加target="_self"明确窗口行为 -->
-    <div class="mb-6">
-      <a href="web/education.html" target="_self" class="link-btn w-full flex justify-between items-center bg-gray-50 p-3 rounded-lg mb-2 hover:bg-gray-100 hover:shadow-md">
-        <h3 class="text-lg font-semibold text-gray-700 flex items-center">
-          <i class="fa fa-graduation-cap text-blue-500 mr-2"></i>教育经历
+    <!-- 教育经历 -->
+    <div class="module">
+      <a href="web/education.html" target="_self" class="link-btn">
+        <h3 class="btn-text">
+          <span class="btn-icon icon-graduation icon-edu"></span>
+          教育经历
         </h3>
-        <i class="fa fa-angle-right text-gray-500"></i>
+        <span class="btn-arrow icon-angle-right"></span>
       </a>
     </div>
 
     <!-- 近期工作 -->
-    <div class="mb-6">
-      <a href="web/projects.html" target="_self" class="link-btn w-full flex justify-between items-center bg-gray-50 p-3 rounded-lg mb-2 hover:bg-gray-100 hover:shadow-md">
-        <h3 class="text-lg font-semibold text-gray-700 flex items-center">
-          <i class="fa fa-briefcase text-green-500 mr-2"></i>近期工作/项目
+    <div class="module">
+      <a href="web/projects.html" target="_self" class="link-btn">
+        <h3 class="btn-text">
+          <span class="btn-icon icon-briefcase icon-project"></span>
+          近期学习/项目
         </h3>
-        <i class="fa fa-angle-right text-gray-500"></i>
+        <span class="btn-arrow icon-angle-right"></span>
       </a>
     </div>
 
     <!-- 歌单入口 -->
-    <div class="mb-6">
-      <a href="web/playlist.html" target="_self" class="link-btn w-full flex justify-between items-center bg-gray-50 p-3 rounded-lg mb-2 hover:bg-gray-100 hover:shadow-md">
-        <h3 class="text-lg font-semibold text-gray-700 flex items-center">
-          <i class="fa fa-music text-purple-500 mr-2"></i>我的歌单
+    <div class="module">
+      <a href="web/playlist.html" target="_self" class="link-btn">
+        <h3 class="btn-text">
+          <span class="btn-icon icon-music-note icon-music"></span>
+          我的歌单
         </h3>
-        <i class="fa fa-angle-right text-gray-500"></i>
+        <span class="btn-arrow icon-angle-right"></span>
       </a>
     </div>
 
     <!-- 联系我入口 -->
-    <div class="mb-8">
-      <a href="web/contact.html" target="_self" class="link-btn w-full flex justify-between items-center bg-gray-50 p-3 rounded-lg mb-2 hover:bg-gray-100 hover:shadow-md">
-        <h3 class="text-lg font-semibold text-gray-700 flex items-center">
-          <i class="fa fa-phone-square text-orange-500 mr-2"></i>联系我
+    <div class="module-contact">
+      <a href="web/contact.html" target="_self" class="link-btn">
+        <h3 class="btn-text">
+          <span class="btn-icon icon-phone icon-contact"></span>
+          联系我
         </h3>
-        <i class="fa fa-angle-right text-gray-500"></i>
+        <span class="btn-arrow icon-angle-right"></span>
       </a>
     </div>
 
     <!-- GitHub链接 -->
-    <div class="text-center">
-      <a href="https://github.com/xyloph0nex17" target="_blank" class="inline-flex items-center bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition">
-        <i class="fa fa-github mr-2"></i>访问我的GitHub
+    <div class="github-container">
+      <a href="https://github.com/xyloph0nex17" target="_blank" class="github-btn">
+        <span class="github-icon icon-github"></span>
+        访问我的GitHub
       </a>
     </div>
   </div>
 
-  <!-- 补充回到主页链接，优化用户体验 -->
-  <footer class="text-center text-gray-500 text-sm mt-6">
-    © 2025 xyloph0nex17 | <a href="./index.html" class="text-blue-500 hover:underline">回到主页</a>
+  <!-- 页脚 -->
+  <footer>
+    © 2025 xyloph0nex17 | <a href="./index.html" class="footer-link">回到主页</a>
   </footer>
 </body>
 </html>
